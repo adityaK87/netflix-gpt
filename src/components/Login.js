@@ -1,10 +1,15 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
 import { validateData } from "../utils/validate";
+import {
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
 	const [isSignInForm, setIsSignInForm] = useState(true);
-	const [errMessage, setErrmessage] = useState(null);
+	const [message, setErrorMessage] = useState(null);
 
 	const email = useRef(null);
 	const password = useRef(null);
@@ -14,11 +19,51 @@ const Login = () => {
 	};
 
 	const handleSignIn = () => {
-		const errMessage = validateData(
+		const message = validateData(
 			email.current.value,
 			password.current.value
 		);
-		setErrmessage(errMessage);
+		setErrorMessage(message);
+		if (message) return;
+
+		if (!isSignInForm) {
+			//Sign up logic
+			createUserWithEmailAndPassword(
+				auth,
+				email.current.value,
+				password.current.value
+			)
+				.then((userCredential) => {
+					// Signed up
+					const user = userCredential.user;
+					console.log(user);
+					// ...
+				})
+				.catch((error) => {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					setErrorMessage(errorCode + "-" + errorMessage);
+					// ..
+				});
+		} else {
+			//sign in logic
+			signInWithEmailAndPassword(
+				auth,
+				email.current.value,
+				password.current.value
+			)
+				.then((userCredential) => {
+					// Signed in
+					const user = userCredential.user;
+					console.log(user);
+					// ...
+				})
+				.catch((error) => {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					setErrorMessage(errorCode + "-" + errorMessage);
+				});
+		}
 	};
 
 	return (
@@ -56,7 +101,7 @@ const Login = () => {
 					type="password"
 					placeholder="Password"
 				/>
-				<p className="text-red-600 font-bold">{errMessage}</p>
+				<p className="text-red-600 font-bold">{message}</p>
 				<button
 					onClick={handleSignIn}
 					className="w-full my-6 rounded-md bg-red-700 p-4">
