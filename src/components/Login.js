@@ -4,15 +4,23 @@ import { validateData } from "../utils/validate";
 import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
+	updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
 	const [isSignInForm, setIsSignInForm] = useState(true);
 	const [message, setErrorMessage] = useState(null);
 
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	const email = useRef(null);
 	const password = useRef(null);
+	const name = useRef(null);
 
 	const toggleForm = () => {
 		setIsSignInForm(!isSignInForm);
@@ -36,6 +44,27 @@ const Login = () => {
 				.then((userCredential) => {
 					// Signed up
 					const user = userCredential.user;
+					updateProfile(user, {
+						displayName: name.current.value,
+						photoURL:
+							"https://avatars.githubusercontent.com/u/100465366?v=4",
+					})
+						.then(() => {
+							const { uid, email, displayName, photoURL } =
+								auth.currentUser;
+							dispatch(
+								addUser({
+									uid: uid,
+									email: email,
+									displayName: displayName,
+									photoURL: photoURL,
+								})
+							);
+							navigate("/browse");
+						})
+						.catch((error) => {
+							setErrorMessage(error.message);
+						});
 					console.log(user);
 					// ...
 				})
@@ -63,6 +92,7 @@ const Login = () => {
 					const errorMessage = error.message;
 					setErrorMessage(errorCode + "-" + errorMessage);
 				});
+			navigate("/browse");
 		}
 	};
 
@@ -84,6 +114,7 @@ const Login = () => {
 				</h1>
 				{!isSignInForm && (
 					<input
+						ref={name}
 						className="w-full my-4 p-4 bg-gray-700"
 						type="text"
 						placeholder="Full Name"
