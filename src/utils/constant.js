@@ -6,3 +6,12 @@ export const NETFLIX_BACKGROUND =
 
 export const USER_AVTAR =
 	"https://avatars.githubusercontent.com/u/100465366?v=4";
+
+export const API_OPTIONS = {
+	method: "GET",
+	headers: {
+		accept: "application/json",
+		Authorization:
+			"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NjAwNDgzNDgyNTJkZWNjNWQzM2RiZDFjMjZkNzA3YiIsIm5iZiI6MTcyMTgxNDIwMy4yODEwMiwic3ViIjoiNjZhMGNiZGZhODM0YTRhMjNhZTBkNTU2Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.Uc2Lvis085NGFPObMnHZwLCt0YF5b1XkttU30ShMI-g",
+	},
+};

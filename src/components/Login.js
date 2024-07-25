@@ -9,6 +9,7 @@ import {
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { NETFLIX_BACKGROUND, USER_AVTAR } from "../utils/constant";
 
 const Login = () => {
 	const [isSignInForm, setIsSignInForm] = useState(true);
@@ -44,8 +45,7 @@ const Login = () => {
 					const user = userCredential.user;
 					updateProfile(user, {
 						displayName: name.current.value,
-						photoURL:
-							"https://avatars.githubusercontent.com/u/100465366?v=4",
+						photoURL: USER_AVTAR,
 					})
 						.then(() => {
 							const { uid, email, displayName, photoURL } =
@@ -62,13 +62,11 @@ const Login = () => {
 						.catch((error) => {
 							setErrorMessage(error.message);
 						});
-					// ...
 				})
 				.catch((error) => {
 					const errorCode = error.code;
 					const errorMessage = error.message;
 					setErrorMessage(errorCode + "-" + errorMessage);
-					// ..
 				});
 		} else {
 			//sign in logic
@@ -81,7 +79,6 @@ const Login = () => {
 					// Signed in
 					const user = userCredential.user;
 					console.log(user);
-					// ...
 				})
 				.catch((error) => {
 					const errorCode = error.code;
@@ -97,7 +94,7 @@ const Login = () => {
 			<div>
 				<img
 					className="absolute"
-					src="https://assets.nflxext.com/ffe/siteui/vlv3/335ddde7-3955-499c-b4cc-ca2eb7e1ae71/a7d20bc1-831c-4f9d-8153-11bdf7a08d23/IN-en-20240624-POP_SIGNUP_TWO_WEEKS-perspective_WEB_13cda806-d858-493e-b4aa-f2792ff965dc_large.jpg"
+					src={NETFLIX_BACKGROUND}
 					alt="CoverImage"
 				/>
 			</div>
