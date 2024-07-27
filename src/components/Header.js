@@ -5,6 +5,7 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO } from "../utils/constant";
+import { toggleGptSearch } from "../utils/gptSlice";
 
 const Header = () => {
 	const dispatch = useDispatch();
@@ -43,10 +44,15 @@ const Header = () => {
 		return () => unsubscribe();
 	}, []);
 	return (
-		<div className="absolute py-2 px-8 bg-gradient-to-b from-black z-10 w-screen flex justify-between">
+		<div className="absolute py-2 px-8 bg-gradient-to-b from-black z-10 w-full flex justify-between">
 			<img className="w-40 " src={LOGO} alt="Logo" />
 			{user && (
-				<div className="flex p-2">
+				<div className="flex p-2 items-center">
+					<button
+						className="bg-purple-700 text-white font-semibold rounded-sm h-12 py-2 px-4 mr-2"
+						onClick={() => dispatch(toggleGptSearch())}>
+						GPT Search
+					</button>
 					<img
 						className="w-12 h-12"
 						src={user?.photoURL}

@@ -6,6 +6,8 @@ import SecondaryContainer from "./SecondaryContainer";
 import usePopularMovies from "../hooks/usePopularMovies";
 import useUpComingMovies from "./useUpcomingMovies";
 import useTopRatedMovies from "../hooks/useTopRatedMovies";
+import { useSelector } from "react-redux";
+import GptSearchComponent from "./GptSearchComponent";
 
 const Browse = () => {
 	//these are the custom hooks for fetching data and updating the store
@@ -13,11 +15,18 @@ const Browse = () => {
 	usePopularMovies();
 	useUpComingMovies();
 	useTopRatedMovies();
+	const isGptSearchOpen = useSelector((store) => store.gpt.showGptSearch);
 	return (
-		<div>
+		<div className="w-[100%]">
 			<Header />
-			<MainContainer />
-			<SecondaryContainer />
+			{isGptSearchOpen ? (
+				<GptSearchComponent />
+			) : (
+				<>
+					<MainContainer />
+					<SecondaryContainer />
+				</>
+			)}
 		</div>
 	);
 };
