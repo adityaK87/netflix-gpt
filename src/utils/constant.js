@@ -11,8 +11,7 @@ export const API_OPTIONS = {
 	method: "GET",
 	headers: {
 		accept: "application/json",
-		Authorization:
-			"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NjAwNDgzNDgyNTJkZWNjNWQzM2RiZDFjMjZkNzA3YiIsIm5iZiI6MTcyMTgxNDIwMy4yODEwMiwic3ViIjoiNjZhMGNiZGZhODM0YTRhMjNhZTBkNTU2Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.Uc2Lvis085NGFPObMnHZwLCt0YF5b1XkttU30ShMI-g",
+		Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
 	},
 };
 
@@ -23,9 +22,3 @@ export const SUPPORTED_LANGUAGE = [
 	{ identifier: "spanish", name: "Spanish" },
 	{ identifier: "hindi", name: "Hindi" },
 ];
-
-export const OPENAI_KEY =
-	"sk-proj-x48f2NFtaTxaLVHe3Gd9T3BlbkFJ2wRQzn2l58cfh6vRpX7V";
-
-export const GROQ_API_KEY =
-	"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";

@@ -39,7 +39,6 @@ const GptSearchInput = () => {
 			model: "llama3-8b-8192",
 		});
 
-		console.log(groqMovieData?.choices[0]?.message?.content);
 		//converting movies string into the array
 		const groqMovies =
 			groqMovieData?.choices[0]?.message?.content.split(",");
