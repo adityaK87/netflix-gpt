@@ -5,15 +5,19 @@ import GptMovieSuggestion from "./GptMovieSuggestion";
 
 const GptSearchComponent = () => {
 	return (
-		<div className="">
-			<img
-				className="fixed max-w-full -z-20"
-				src={NETFLIX_BACKGROUND}
-				alt="CoverImage"
-			/>
-			<GptSearchInput />
-			<GptMovieSuggestion />
-		</div>
+		<>
+			<div className="">
+				<img
+					className="fixed object-cover md:w-full h-screen max-w-full -z-20"
+					src={NETFLIX_BACKGROUND}
+					alt="CoverImage"
+				/>
+			</div>
+			<div className="">
+				<GptSearchInput />
+				<GptMovieSuggestion />
+			</div>
+		</>
 	);
 };
 

@@ -11,7 +11,7 @@ const SecondaryContainer = () => {
 		movies.upComingMovies &&
 		movies.topRatedMovies && (
 			<div className="bg-black">
-				<div className="-mt-52 relative z-20">
+				<div className="mt-0 md:-mt-52 relative z-20">
 					<MovieList
 						title={"Now Playing"}
 						movies={movies?.nowPlayingMovies}

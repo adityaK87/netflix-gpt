@@ -51,8 +51,8 @@ const Header = () => {
 
 	const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 	return (
-		<div className="absolute py-2 px-8 bg-gradient-to-b from-black z-10 w-full flex justify-between">
-			<img className="w-40 " src={LOGO} alt="Logo" />
+		<div className="absolute py-2 px-8 bg-gradient-to-b from-black z-10 w-full flex flex-col items-center md:flex-row md:justify-between">
+			<img className="w-40" src={LOGO} alt="Logo" />
 			{user && (
 				<div className="flex p-2 items-center">
 					{showGptSearch && (
